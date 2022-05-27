@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 @Table(name = "owners")
 public class OwnerEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +25,9 @@ public class OwnerEntity {
         return id;
     }
 
-    public void setId(Long ownerId) {
-        this.id = ownerId;
+    public OwnerEntity setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getOwnerName() {
@@ -43,12 +43,12 @@ public class OwnerEntity {
         return casts;
     }
 
-    public void setCasts(List<CatEntity> casts) {
+    public OwnerEntity setCasts(List<CatEntity> casts) {
         this.casts = casts;
+        return this;
     }
 
-    public OwnerEntity addCat(CatEntity cat) {
+    public void addCat(CatEntity cat) {
         this.casts.add(cat);
-        return this;
     }
 }

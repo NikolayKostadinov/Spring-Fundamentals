@@ -18,8 +18,9 @@ public class CatEntity {
         return id;
     }
 
-    public void setId(Long catId) {
-        this.id = catId;
+    public CatEntity setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getCatName() {
