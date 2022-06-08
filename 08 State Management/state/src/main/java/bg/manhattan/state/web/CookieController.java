@@ -23,8 +23,9 @@ public class CookieController {
     }
 
     @PostMapping("/cookies")
-    public String cookies(String language, HttpServletResponse resource){
+    public String cookies(String language, HttpServletResponse response){
         Cookie cookie = new Cookie(LANG_COOKIE_NAME, language);
+        response.addCookie(cookie);
         return "redirect:/cookies";
     }
 }
