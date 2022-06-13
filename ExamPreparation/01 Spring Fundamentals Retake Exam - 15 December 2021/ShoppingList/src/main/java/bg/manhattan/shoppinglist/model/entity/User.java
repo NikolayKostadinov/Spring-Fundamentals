@@ -22,7 +22,7 @@ public class User {
     /**
      * Password length must be between 3 and 20 characters (inclusive 3 and 20).
      */
-    @Column(nullable = false, length = 21)
+    @Column(name="password", nullable = false)
     private String passwordHash;
 
     /**

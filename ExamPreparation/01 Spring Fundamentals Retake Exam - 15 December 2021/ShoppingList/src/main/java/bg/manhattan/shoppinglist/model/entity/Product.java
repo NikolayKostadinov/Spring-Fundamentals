@@ -33,7 +33,7 @@ public class Product {
      * The price must be a positive number
      */
     @Column(nullable = false)
-    private BigDecimal Price;
+    private BigDecimal price;
 
     /**
      * Date and Time, that cannot be in the past
@@ -46,4 +46,58 @@ public class Product {
      */
     @ManyToOne(optional = false)
     private Category category;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Product setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Product setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Product setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Product setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public LocalDateTime getNeededBefore() {
+        return neededBefore;
+    }
+
+    public Product setNeededBefore(LocalDateTime neededBefore) {
+        this.neededBefore = neededBefore;
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Product setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
 }
