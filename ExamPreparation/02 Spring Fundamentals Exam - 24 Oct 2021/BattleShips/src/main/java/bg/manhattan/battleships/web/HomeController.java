@@ -38,9 +38,6 @@ public class HomeController {
     public String index(Model model) {
         if (this.userService.isLoggedIn()) {
             model.addAttribute("ships", this.shipService.getAllShips());
-            if (!model.containsAttribute("fireModel")){
-                model.addAttribute("fireModel", new FireBindingModel());
-            }
             return "home";
         }
 
