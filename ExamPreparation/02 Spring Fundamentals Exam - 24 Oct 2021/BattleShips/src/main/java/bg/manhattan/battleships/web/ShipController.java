@@ -36,19 +36,11 @@ public class ShipController {
     }
 
     @GetMapping("/add")
-    public String add(Model model) {
+    public String add() {
         if (!userService.isLoggedIn()) {
             return "redirect:/users/login";
         }
-
-        if (!model.containsAttribute("category")) {
-            addCategories(model);
-        }
         return "ship-add";
-    }
-
-    private void addCategories(Model model) {
-        model.addAttribute("categories", CategoryNameEnum.values());
     }
 
     @PostMapping("/add")
@@ -65,7 +57,7 @@ public class ShipController {
 
         try {
             this.shipService.addShip(this.mapper.map(shipModel, ShipServiceModel.class));
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             ObjectError error = new ObjectError("globalError", ex.getMessage());
             bindingResult.addError(error);
             return getErrorResponse(shipModel, bindingResult, redirectAttributes);

@@ -92,8 +92,12 @@
                                 th:field="*{category}"
                                 th:errorclass="bg-danger"
                                 aria-describedby="categoryHelpInline">
-                            <option value="" selected>Category</option>
-                            <option th:each="c : ${categories}" th:value="${c}" th:text="${c}">CATEGORY</option>
+                            <option value="" selected>-- Select a Category --</option>
+                            <option th:each="c : ${T(bg.manhattan.battleships.model.entity.enums.CategoryNameEnum)}"
+                                    th:value="${c}"
+                                    th:text="${c}"
+                                    th:selected="${c} == *{category}">CATEGORY
+                            </option>
                         </select>
                         <small id="categoryHelpInline"
                                th:if="${#fields.hasErrors('category')}"

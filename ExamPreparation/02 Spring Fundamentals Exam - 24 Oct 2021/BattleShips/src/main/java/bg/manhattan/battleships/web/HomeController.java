@@ -4,6 +4,7 @@ import bg.manhattan.battleships.model.binding.FireBindingModel;
 import bg.manhattan.battleships.model.binding.ShipAddBindingModel;
 import bg.manhattan.battleships.model.service.ShipFireServiceModel;
 import bg.manhattan.battleships.model.service.UserServiceModel;
+import bg.manhattan.battleships.model.view.ShipListViewModel;
 import bg.manhattan.battleships.service.ShipService;
 import bg.manhattan.battleships.service.UserService;
 import org.modelmapper.ModelMapper;
