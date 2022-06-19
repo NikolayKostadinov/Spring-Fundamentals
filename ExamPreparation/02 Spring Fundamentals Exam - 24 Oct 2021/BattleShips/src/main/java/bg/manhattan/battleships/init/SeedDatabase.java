@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SeedDatabase implements CommandLineRunner {
@@ -17,11 +19,12 @@ public class SeedDatabase implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if (this.categoryRepository.findAll().isEmpty()) {
-            Arrays.stream(CategoryNameEnum.values())
+            List<Category> categories = Arrays.stream(CategoryNameEnum.values())
                     .map(categoryName -> new Category().setName(categoryName))
-                    .forEach(category -> this.categoryRepository.save(category));
+                    .collect(Collectors.toList());
+            this.categoryRepository.saveAll(categories);
         }
     }
 }

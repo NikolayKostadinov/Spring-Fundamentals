@@ -54,7 +54,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout() {
         if (!userService.isLoggedIn()){
-            return "redirect:/users/login";
+            return "redirect: users/login";
         }
         this.userService.logout();
         return "redirect:/";
@@ -75,8 +75,7 @@ public class UserController {
     public String register(@Valid UserRegisterBindingModel registerModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()
-        || !registerModel.getPassword().equals(registerModel.getConfirmPassword())) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerModel", registerModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerModel", bindingResult );
             return "redirect:register";
@@ -84,6 +83,10 @@ public class UserController {
 
         this.userService.registerUser(this.mapper.map(registerModel, UserServiceModel.class));
         return "redirect:/";
+    }
+
+    private boolean passwordNotMuch(UserRegisterBindingModel registerModel) {
+        return !registerModel.getPassword().equals(registerModel.getConfirmPassword());
     }
 
     @ModelAttribute("loginModel")

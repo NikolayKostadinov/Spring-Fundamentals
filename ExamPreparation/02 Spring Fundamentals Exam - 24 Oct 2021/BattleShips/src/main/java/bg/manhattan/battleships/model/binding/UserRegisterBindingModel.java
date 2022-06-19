@@ -1,10 +1,15 @@
 package bg.manhattan.battleships.model.binding;
 
+import bg.manhattan.battleships.model.validator.FieldMatch;
+import bg.manhattan.battleships.model.validator.UniqueEmail;
+import bg.manhattan.battleships.model.validator.UniqueUserName;
+
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@FieldMatch(first = "password", second = "confirmPassword", message = "Password and Confirm password mut be the same.")
 public class UserRegisterBindingModel {
 
     /**
@@ -13,6 +18,7 @@ public class UserRegisterBindingModel {
      */
     @NotNull(message = "Username must be between 3 and 10 characters")
     @Size(min=3, max = 10, message = "Username must be between 3 and 10 characters")
+    @UniqueUserName(message = "Username must be unique.")
     private String username;
 
     /**
@@ -28,6 +34,7 @@ public class UserRegisterBindingModel {
      */
     @NotNull( message = "Enter valid email address")
     @Email(regexp = "^(\\w+@\\w+)(.\\w+){2,}$", message = "Enter valid email address")
+    @UniqueEmail(message="Email must be unique.")
     private String email;
 
     /**

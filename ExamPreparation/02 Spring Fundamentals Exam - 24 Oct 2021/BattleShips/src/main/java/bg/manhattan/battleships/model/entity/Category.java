@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "categories")
 public class Category extends BaseEntity{
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false, unique = true)
     private CategoryNameEnum name;
 

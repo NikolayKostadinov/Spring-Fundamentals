@@ -4,6 +4,7 @@ import bg.manhattan.battleships.model.entity.User;
 import bg.manhattan.battleships.model.service.UserServiceLoginModel;
 import bg.manhattan.battleships.model.service.UserServiceModel;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface UserService {
@@ -16,5 +17,10 @@ public interface UserService {
     boolean isLoggedIn();
 
     Optional<User> getCurrentUser();
+
     String getCurrentUserName();
+
+    Optional<UserServiceModel> getUserByUsername(String userName);
+
+    Optional<UserServiceModel> getUserByEmail(String email);
 }

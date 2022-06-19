@@ -22,7 +22,9 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                           ModelMapper mapper, CurrentUser currentUser, PasswordEncoder passwordEncoder) {
+                           ModelMapper mapper,
+                           CurrentUser currentUser,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.currentUser = currentUser;
@@ -72,5 +74,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getCurrentUserName() {
         return this.currentUser.getUsername();
+    }
+
+    @Override
+    public Optional<UserServiceModel> getUserByUsername(String userName) {
+        Optional<User> user = this.userRepository.findByUsername(userName);
+        return toUserServiceModel(user);
+    }
+
+    @Override
+    public Optional<UserServiceModel> getUserByEmail(String email) {
+        Optional<User> user = this.userRepository.findByEmail(email);
+        return toUserServiceModel(user);
+    }
+
+    private Optional<UserServiceModel> toUserServiceModel(Optional<User> user) {
+        return user.isPresent() ?
+                Optional.of(this.mapper.map(user.get(), UserServiceModel.class))
+                : Optional.empty();
     }
 }

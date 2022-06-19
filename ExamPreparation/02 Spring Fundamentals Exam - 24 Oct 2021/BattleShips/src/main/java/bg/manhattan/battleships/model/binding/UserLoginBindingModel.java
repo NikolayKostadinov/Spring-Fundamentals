@@ -1,5 +1,8 @@
 package bg.manhattan.battleships.model.binding;
 
+import bg.manhattan.battleships.model.validator.FieldMatch;
+import bg.manhattan.battleships.model.validator.UniqueUserName;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
