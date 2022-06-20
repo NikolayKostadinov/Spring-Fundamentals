@@ -1,6 +1,7 @@
 package bg.manhattan.battleships.model.binding;
 
 import bg.manhattan.battleships.model.entity.enums.CategoryNameEnum;
+import bg.manhattan.battleships.model.validator.UniqueShipName;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class ShipAddBindingModel {
      */
     @NotNull(message = "Name must be between 2 and 10 characters.")
     @Size(min=2, max = 10, message = "Name must be between 2 and 10 characters.")
+    @UniqueShipName()
     private String name;
 
     /**

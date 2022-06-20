@@ -39,19 +39,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean loginUser(UserServiceLoginModel userModel) {
-        Optional<User> user = this.userRepository.findByUsername(userModel.getUsername());
-        if (user.isEmpty()) {
+        Optional<User> dbUser = this.userRepository.findByUsername(userModel.getUsername());
+        if (dbUser.isEmpty()) {
             return false;
         }
 
-        boolean matches = this.passwordEncoder.matches(userModel.getPassword(), user.get().getPasswordHash());
+        boolean matches = this.passwordEncoder.matches(userModel.getPassword(), dbUser.get().getPasswordHash());
         if (!matches) {
             return false;
         }
 
+        User user = dbUser.get();
         this.currentUser
-                .setUsername(user.get().getUsername());
-
+                .setId(user.getId())
+                .setUsername(user.getUsername());
         return true;
     }
 
@@ -67,8 +68,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getCurrentUser() {
-
-        return this.userRepository.findByUsername(this.currentUser.getUsername());
+        return this.userRepository.findById(this.currentUser.getId());
     }
 
     @Override

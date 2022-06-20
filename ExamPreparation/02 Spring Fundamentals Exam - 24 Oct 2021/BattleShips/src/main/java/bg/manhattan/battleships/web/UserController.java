@@ -43,8 +43,9 @@ public class UserController {
         }
 
         if (!this.userService.loginUser(this.mapper.map(loginModel, UserServiceLoginModel.class))){
-            ObjectError error = new ObjectError("globalError", "Enter valid username and password");
-            bindingResult.addError(error);
+            bindingResult.addError(
+                    new ObjectError("badCredentials",
+                            "Enter valid username and password"));
             return getErrorResponse(loginModel, bindingResult, redirectAttributes);
         }
 

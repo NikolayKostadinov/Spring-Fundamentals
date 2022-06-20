@@ -1,10 +1,20 @@
 package bg.manhattan.battleships.model.service;
 
 public class UserServiceModel {
+    private Long id;
     private String username;
     private String fullName;
     private String email;
     private String password;
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserServiceModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getUsername() {
         return username;

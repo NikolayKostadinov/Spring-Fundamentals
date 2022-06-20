@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ShipRepository extends JpaRepository<Ship, Long> {
@@ -16,4 +17,6 @@ public interface ShipRepository extends JpaRepository<Ship, Long> {
             "FROM Ship s " +
             "JOIN s.user u")
     List<ShipViewModel> findAllShips();
+
+    Optional<Ship> findByName(String shipName);
 }

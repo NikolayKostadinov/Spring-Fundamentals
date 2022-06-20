@@ -5,6 +5,7 @@ import bg.manhattan.battleships.model.entity.Ship;
 import bg.manhattan.battleships.model.entity.User;
 import bg.manhattan.battleships.model.service.ShipFireServiceModel;
 import bg.manhattan.battleships.model.service.ShipServiceModel;
+import bg.manhattan.battleships.model.service.UserServiceModel;
 import bg.manhattan.battleships.model.view.ShipListViewModel;
 import bg.manhattan.battleships.repository.ShipRepository;
 import bg.manhattan.battleships.service.CategoryService;
@@ -73,5 +74,10 @@ public class ShipServiceImpl implements ShipService {
         } else {
             this.repository.save(defender);
         }
+    }
+
+    @Override
+    public Optional<Ship> findByName(String shipName) {
+        return this.repository.findByName(shipName);
     }
 }
