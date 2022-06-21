@@ -1,6 +1,7 @@
 package bg.manhattan.musicdb.service;
 
 
+import bg.manhattan.musicdb.model.entity.User;
 import bg.manhattan.musicdb.model.service.UserServiceLoginModel;
 import bg.manhattan.musicdb.model.service.UserServiceModel;
 
@@ -15,7 +16,7 @@ public interface UserService {
 
     boolean isLoggedIn();
 
-    Optional<UserServiceModel> getCurrentUser();
+    Optional<User> getCurrentUser();
 
     String getCurrentUserName();
 

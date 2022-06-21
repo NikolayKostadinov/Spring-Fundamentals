@@ -1,81 +1,90 @@
-package bg.manhattan.musicdb.model.entity;
+package bg.manhattan.musicdb.model.binding;
 
+import bg.manhattan.musicdb.model.entity.Artist;
+import bg.manhattan.musicdb.model.entity.User;
+import bg.manhattan.musicdb.model.entity.enums.ArtistNameEnum;
 import bg.manhattan.musicdb.model.entity.enums.Genre;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name="albums")
-public class Album extends BaseEntity{
+public class AlbumAddBindingModel {
+
     /**
      *  Name length must be between 3 and 20 characters (inclusive 3 and 20).
      */
-    @Column(nullable = false)
+    @NotBlank(message = "Album name is required")
+    @Size(min=3, max = 20, message = "Name must be between 3 and 20 characters")
     private String name;
 
     /**
      * Image Url length must be minimum 5(inclusive) characters.
      */
-    @Column(name = "image_url", nullable = false)
+    @NotBlank(message = "Image URL is required")
+    @Size(min = 5, message = "Image url must be more than 5 characters")
     private String imageUrl;
 
     /**
      * Description min length must be minimum 5(inclusive) characters
      * The description is a long text field.
      */
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @NotBlank(message = "Description is required")
+    @Size(min=5, message = "Description length must be more than 5 characters")
     private String description;
 
     /**
      * All sold copies of the album
      * Must be a more than 10(inclusive).
      */
-    @Column(nullable = false)
+    @NotNull(message = "Copies is required")
+    @Positive(message = "Copies must be positive")
     private Integer copies;
 
     /**
      * Has a Price
      * Price must be a positive number
      */
-    @Column(nullable = false)
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be positive")
     private BigDecimal price;
 
     /**
      * Date that cannot be in the future
      */
-    @Column(name="released_date", nullable = false)
+    @NotNull
+    @PastOrPresent(message = "Release date cannot be in the future")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate releasedDate;
 
     /**
      * Name of producer
      * Can be null.
      */
-    @Column
     private String producer;
 
     /**
      * This is just an enumeration, not entity.
      */
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    @NotNull(message = "You must select genre")
     private Genre genre;
 
     /**
      * This is the relation with artists
      */
-    @ManyToOne(optional = false)
-    private Artist artist;
-
-    @ManyToOne(optional = false)
-    private User addedFrom;
+    @NotNull(message = "You must select artist")
+    private ArtistNameEnum artist;
 
     public String getName() {
         return name;
     }
 
-    public Album setName(String name) {
+    public AlbumAddBindingModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -84,7 +93,7 @@ public class Album extends BaseEntity{
         return imageUrl;
     }
 
-    public Album setImageUrl(String imageUrl) {
+    public AlbumAddBindingModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -93,7 +102,7 @@ public class Album extends BaseEntity{
         return description;
     }
 
-    public Album setDescription(String description) {
+    public AlbumAddBindingModel setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -102,7 +111,7 @@ public class Album extends BaseEntity{
         return copies;
     }
 
-    public Album setCopies(Integer copies) {
+    public AlbumAddBindingModel setCopies(Integer copies) {
         this.copies = copies;
         return this;
     }
@@ -111,7 +120,7 @@ public class Album extends BaseEntity{
         return price;
     }
 
-    public Album setPrice(BigDecimal price) {
+    public AlbumAddBindingModel setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -120,7 +129,7 @@ public class Album extends BaseEntity{
         return releasedDate;
     }
 
-    public Album setReleasedDate(LocalDate releasedDate) {
+    public AlbumAddBindingModel setReleasedDate(LocalDate releasedDate) {
         this.releasedDate = releasedDate;
         return this;
     }
@@ -129,7 +138,7 @@ public class Album extends BaseEntity{
         return producer;
     }
 
-    public Album setProducer(String producer) {
+    public AlbumAddBindingModel setProducer(String producer) {
         this.producer = producer;
         return this;
     }
@@ -138,26 +147,17 @@ public class Album extends BaseEntity{
         return genre;
     }
 
-    public Album setGenre(Genre genre) {
+    public AlbumAddBindingModel setGenre(Genre genre) {
         this.genre = genre;
         return this;
     }
 
-    public Artist getArtist() {
+    public ArtistNameEnum getArtist() {
         return artist;
     }
 
-    public Album setArtist(Artist artist) {
+    public AlbumAddBindingModel setArtist(ArtistNameEnum artist) {
         this.artist = artist;
-        return this;
-    }
-
-    public User getAddedFrom() {
-        return addedFrom;
-    }
-
-    public Album setAddedFrom(User addedFrom) {
-        this.addedFrom = addedFrom;
         return this;
     }
 }
