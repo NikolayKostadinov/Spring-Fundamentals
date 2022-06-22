@@ -67,9 +67,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserServiceModel> getCurrentUser() {
-        Optional<User> user = this.userRepository.findById(this.currentUser.getId());
-        return toUserServiceModel(user);
+    public Optional<User> getCurrentUser() {
+        return this.userRepository.findById(this.currentUser.getId());
     }
 
     @Override
@@ -90,8 +89,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private Optional<UserServiceModel> toUserServiceModel(Optional<User> user) {
-        return user.isPresent() ?
-                Optional.of(this.mapper.map(user.get(), UserServiceModel.class))
-                : Optional.empty();
+        return user.map(value -> this.mapper.map(value, UserServiceModel.class));
     }
 }

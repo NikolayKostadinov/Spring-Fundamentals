@@ -1,5 +1,6 @@
 package bg.manhattan.finalexam.service;
 
+import bg.manhattan.finalexam.model.entity.User;
 import bg.manhattan.finalexam.model.service.UserServiceLoginModel;
 import bg.manhattan.finalexam.model.service.UserServiceModel;
 
@@ -14,7 +15,7 @@ public interface UserService {
 
     boolean isLoggedIn();
 
-    Optional<UserServiceModel> getCurrentUser();
+    Optional<User> getCurrentUser();
 
     String getCurrentUserName();
 
