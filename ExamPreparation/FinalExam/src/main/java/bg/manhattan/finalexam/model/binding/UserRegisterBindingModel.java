@@ -10,7 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@FieldMatch(first = "password", second = "confirmPassword", message = "Password and Confirm password mut be the same.")
+@FieldMatch(first = "password", second = "confirmPassword", message = "Password and Confirm password must be the same.")
 public class UserRegisterBindingModel {
 
     /**
