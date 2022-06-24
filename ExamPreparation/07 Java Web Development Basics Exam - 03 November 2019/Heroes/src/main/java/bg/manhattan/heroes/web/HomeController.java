@@ -36,7 +36,6 @@ public class HomeController {
                         .collect(Collectors.toList());
 
                 model.addAttribute("heroes", heroes);
-                model.addAttribute("username", this.userService.getCurrentUser().get().getUsername());
             }
             return "home";
         }
