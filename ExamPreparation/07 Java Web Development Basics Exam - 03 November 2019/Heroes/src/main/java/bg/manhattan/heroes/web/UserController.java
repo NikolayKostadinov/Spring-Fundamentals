@@ -31,6 +31,9 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+        if  (this.userService.isLoggedIn()){
+            return "redirect:/";
+        }
         return "login";
     }
 
@@ -38,6 +41,9 @@ public class UserController {
     public String login(@Valid UserLoginBindingModel loginModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
+        if  (this.userService.isLoggedIn()){
+            return "redirect:/";
+        }
         if (bindingResult.hasErrors()) {
             return getErrorResponse(loginModel, bindingResult, redirectAttributes);
         }
