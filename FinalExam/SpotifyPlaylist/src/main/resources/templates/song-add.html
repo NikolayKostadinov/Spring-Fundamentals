@@ -35,7 +35,8 @@
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="title" class="h4 mb-2 text-white">Title</label>
             </div>
-            <input type="text" class="form-control" id="title" th:field="*{title}"
+            <input type="text" class="form-control" id="title"
+                   th:field="*{title}"
                    th:errorclass="bg-danger"/>
             <small th:if="${#fields.hasErrors('title')}"
                    th:errorclass="is-valid"
